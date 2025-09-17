@@ -180,39 +180,87 @@ import {
   View,
 } from "react-native";
 
+// --- Component Title ---
+const Title = ({ text }) => <Text style={styles.title}>{text}</Text>;
+
+// --- Component Input ---
+const Input = ({
+  label,
+  placeholder,
+  secureTextEntry,
+  value,
+  onChangeText,
+}) => (
+  <View style={{ marginBottom: 20 }}>
+    <Text style={styles.label}>{label}</Text>
+    <TextInput
+      style={styles.input}
+      placeholder={placeholder}
+      secureTextEntry={secureTextEntry}
+      value={value}
+      onChangeText={onChangeText}
+    />
+  </View>
+);
+
+// --- Component Button ---
+const Button = ({ text, color, onPress }) => (
+  <TouchableOpacity
+    style={[styles.button, { backgroundColor: color }]}
+    onPress={onPress}
+  >
+    <Text style={styles.buttonText}>{text}</Text>
+  </TouchableOpacity>
+);
+
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = () => {
-    // contoh: nanti bisa dipake untuk login logic
-    alert(`Username: ${username}\nPassword: ${password}`);
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome</Text>
+      <Title text="Welcome" />
 
-      <Text style={styles.label}>Username</Text>
-      <TextInput
-        style={styles.input}
+      <Input
+        label="Username"
         placeholder="Masukan username anda"
         value={username}
         onChangeText={setUsername}
       />
 
-      <Text style={styles.label}>Password</Text>
-      <TextInput
-        style={styles.input}
+      <Input
+        label="Password"
         placeholder="Masukan password anda"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
+      {/* Button Sign In utama */}
+      <Button
+        text="Sign In"
+        color="orange"
+        onPress={() => alert(`Login dengan ${username}`)}
+      />
+
+      {/* Button Social */}
+      <View style={{ marginTop: 20, gap: 10 }}>
+        <Button
+          text="Sign in with Google"
+          color="red"
+          onPress={() => alert("Login dengan Google")}
+        />
+        <Button
+          text="Sign in with Facebook"
+          color="blue"
+          onPress={() => alert("Login dengan Facebook")}
+        />
+        <Button
+          text="Sign in with Apple"
+          color="black"
+          onPress={() => alert("Login dengan Apple")}
+        />
+      </View>
     </View>
   );
 }
@@ -238,10 +286,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 5,
     padding: 10,
-    marginBottom: 20,
   },
   button: {
-    backgroundColor: "orange",
     padding: 15,
     borderRadius: 5,
     alignItems: "center",
