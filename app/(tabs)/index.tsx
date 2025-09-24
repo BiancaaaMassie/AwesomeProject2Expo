@@ -170,131 +170,136 @@
 //   },
 // });
 
-//Exercise4
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+//exercise5
 
-// --- Component Title ---
-const Title = ({ text }) => <Text style={styles.title}>{text}</Text>;
+// Komponen Title
+// const Title = ({ children }) => {
+//   return (
+//     <h1 className="text-3xl font-bold text-foreground mb-6 text-center">
+//       {children}
+//     </h1>
+//   );
+// };
 
-// --- Component Input ---
-const Input = ({
-  label,
-  placeholder,
-  secureTextEntry,
-  value,
-  onChangeText,
-}) => (
-  <View style={{ marginBottom: 20 }}>
-    <Text style={styles.label}>{label}</Text>
-    <TextInput
-      style={styles.input}
-      placeholder={placeholder}
-      secureTextEntry={secureTextEntry}
-      value={value}
-      onChangeText={onChangeText}
-    />
-  </View>
-);
+// // Komponen TextInput
+// const TextInput = ({
+//   label,
+//   placeholder,
+//   value,
+//   onChange,
+//   maxLength,
+//   type = "text",
+//   ...props
+// }) => {
+//   return (
+//     <div className="mb-4">
+//       <label className="block text-foreground text-sm font-medium mb-2">
+//         {label}
+//       </label>
+//       <input
+//         type={type}
+//         value={value}
+//         onChange={onChange}
+//         placeholder={placeholder}
+//         maxLength={maxLength}
+//         className="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+//         {...props}
+//       />
+//     </div>
+//   );
+// };
 
-// --- Component Button ---
-const Button = ({ text, color, onPress }) => (
-  <TouchableOpacity
-    style={[styles.button, { backgroundColor: color }]}
-    onPress={onPress}
-  >
-    <Text style={styles.buttonText}>{text}</Text>
-  </TouchableOpacity>
-);
+// // Komponen Button
+// const Button = ({
+//   children,
+//   onClick,
+//   disabled = false,
+//   type = "button",
+//   ...props
+// }) => {
+//   return (
+//     <button
+//       type={type}
+//       onClick={onClick}
+//       disabled={disabled}
+//       className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed transition-colors"
+//       {...props}
+//     >
+//       {children}
+//     </button>
+//   );
+// };
 
-export default function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+// // Halaman utama
+// const PhoneRegistrationPage = () => {
+//   const [formData, setFormData] = useState({
+//     nama: "",
+//     alamat: "",
+//     email: "",
+//     noTelepon: "",
+//   });
 
-  return (
-    <View style={styles.container}>
-      <Title text="Welcome" />
+//   const handleInputChange = (field, value) => {
+//     if (field === "noTelepon") {
+//       // Hanya mengizinkan input angka untuk nomor telepon
+//       const numericValue = value.replace(/[^0-9]/g, "");
+//       setFormData((prev) => ({ ...prev, [field]: numericValue }));
+//     } else {
+//       setFormData((prev) => ({ ...prev, [field]: value }));
+//     }
+//   };
 
-      <Input
-        label="Username"
-        placeholder="Masukan username anda"
-        value={username}
-        onChangeText={setUsername}
-      />
+//   const handleSubmit = () => {
+//     console.log("Data yang diisi:", formData);
+//   };
 
-      <Input
-        label="Password"
-        placeholder="Masukan password anda"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+//   return (
+//     <div className="min-h-screen bg-background flex items-center justify-center p-4">
+//       <div className="w-full max-w-md bg-card rounded-2xl shadow-lg p-8">
+//         <Title>Registrasi Pengguna</Title>
 
-      {/* Button Sign In utama */}
-      <Button
-        text="Sign In"
-        color="orange"
-        onPress={() => alert(`Login dengan ${username}`)}
-      />
+//         <div className="space-y-4">
+//           <TextInput
+//             label="Nama Lengkap"
+//             placeholder="Masukkan nama lengkap Anda"
+//             value={formData.nama}
+//             onChange={(e) => handleInputChange("nama", e.target.value)}
+//             maxLength={50}
+//           />
 
-      {/* Button Social */}
-      <View style={{ marginTop: 20, gap: 10 }}>
-        <Button
-          text="Sign in with Google"
-          color="red"
-          onPress={() => alert("Login dengan Google")}
-        />
-        <Button
-          text="Sign in with Facebook"
-          color="blue"
-          onPress={() => alert("Login dengan Facebook")}
-        />
-        <Button
-          text="Sign in with Apple"
-          color="black"
-          onPress={() => alert("Login dengan Apple")}
-        />
-      </View>
-    </View>
-  );
-}
+//           <TextInput
+//             label="Alamat"
+//             placeholder="Masukkan alamat lengkap"
+//             value={formData.alamat}
+//             onChange={(e) => handleInputChange("alamat", e.target.value)}
+//             maxLength={100}
+//           />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 40,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    padding: 10,
-  },
-  button: {
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
+//           <TextInput
+//             label="Email"
+//             placeholder="contoh@email.com"
+//             value={formData.email}
+//             onChange={(e) => handleInputChange("email", e.target.value)}
+//             type="email"
+//             maxLength={50}
+//           />
+
+//           <TextInput
+//             label="Nomor Telepon"
+//             placeholder="08xxxxxxxxxx"
+//             value={formData.noTelepon}
+//             onChange={(e) => handleInputChange("noTelepon", e.target.value)}
+//             type="tel"
+//             maxLength={15}
+//           />
+//         </div>
+
+//         <div className="mt-8">
+//           <Button onClick={handleSubmit}>Daftar Sekarang</Button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PhoneRegistrationPage;
